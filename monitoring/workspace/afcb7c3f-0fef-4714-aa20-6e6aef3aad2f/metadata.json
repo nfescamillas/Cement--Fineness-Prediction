@@ -1,0 +1,72 @@
+{
+  "id": "afcb7c3f-0fef-4714-aa20-6e6aef3aad2f",
+  "name": "Mill Fineness Prediction Project",
+  "description": "Determining fineness value based on process parameters",
+  "dashboard": {
+    "name": "Mill Fineness Prediction Project",
+    "panels": [
+      {
+        "type": "evidently.ui.dashboards.reports.DashboardPanelCounter",
+        "id": "1dc53546-b891-4126-9b5a-0a1ab3121d6c",
+        "title": "Mill Fineness Predictor Dashboard",
+        "filter": {
+          "metadata_values": {},
+          "tag_values": [],
+          "include_test_suites": false
+        },
+        "size": 2,
+        "agg": "none",
+        "value": null,
+        "text": null
+      },
+      {
+        "type": "evidently.ui.dashboards.reports.DashboardPanelPlot",
+        "id": "02865592-bb55-486c-9819-abb13106776e",
+        "title": "Current RMSE",
+        "filter": {
+          "metadata_values": {},
+          "tag_values": [],
+          "include_test_suites": false
+        },
+        "size": 1,
+        "values": [
+          {
+            "field_path": "current.rmse",
+            "metric_id": "RegressionQualityMetric",
+            "metric_fingerprint": null,
+            "metric_args": {},
+            "legend": null
+          }
+        ],
+        "plot_type": "bar"
+      },
+      {
+        "type": "evidently.ui.dashboards.reports.DashboardPanelPlot",
+        "id": "6174a390-6636-4bb5-8627-46bd136c132e",
+        "title": "Reference RMSE",
+        "filter": {
+          "metadata_values": {},
+          "tag_values": [],
+          "include_test_suites": false
+        },
+        "size": 1,
+        "values": [
+          {
+            "field_path": "reference.rmse",
+            "metric_id": "RegressionQualityMetric",
+            "metric_fingerprint": null,
+            "metric_args": {},
+            "legend": null
+          }
+        ],
+        "plot_type": "bar"
+      }
+    ],
+    "tabs": [],
+    "tab_id_to_panel_ids": {}
+  },
+  "team_id": null,
+  "date_from": null,
+  "date_to": null,
+  "created_at": "2024-08-02T23:36:35.304625"
+}

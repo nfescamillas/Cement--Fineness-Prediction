@@ -1,0 +1,46 @@
+name: CD
+on: 
+  push:
+    branches:
+      - 'develop'
+    paths:
+      - 'deployment/**'
+
+jobs:
+  build-push-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+    - uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: false
+
+    - name: TF Plan
+      id: tf-plan
+      working-directory: 'infrastructure'
+      run: |
+        terraform init && terraform plan
+
+    - name: TF Apply
+      id: tf-apply
+      working-directory: 'infrastructure'
+      if: ${{ steps.tf-plan.outcome}} == 'success'
+      run: |
+        terraform apply -auto-approve 
+
+    - name: Deploy
+      id: eb-deploy
+      working-directory: 'deployment'
+      uses: sparkplug-app/install-eb-cli-action
+      run: |
+        eb init -p docker -r us-east-1 fineness-prediction-serving-tf
+        eb create mill-project-serving
+
+

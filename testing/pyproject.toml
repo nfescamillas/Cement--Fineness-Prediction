@@ -1,0 +1,15 @@
+[tool.pylint.message_control]
+
+disable =[ "redefined-builtin",
+           "wrong-import-position",
+           "invalid-name",
+           "trailing-whitespace",
+           "line-too-long",
+           "no-member",
+           ]
+
+[tool.black]
+
+skip-string-normalization = true
+
+
