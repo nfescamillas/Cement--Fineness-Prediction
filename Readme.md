@@ -39,7 +39,7 @@ The objective of this project is to build an end to end project that predicts ce
  
 The project started by performing Data Preparation to Data Modeling in Jupyter Notebook. The dataset was stored in an S3 bucket as an xlsx file. The experiment done on the notebook was later implemented in Mage AI for orchestation that also incorporates experiment tracking and model registry. The model registry was then kept in a seperate S3 bucket for further use in the deployment phase.
 
-To run or test the project, one needs to have an AWS account with which the IAM role is properly configured. The following permissions needs to be given:
+To run or test the project, one needs to have an AWS account with which the IAM role is properly configured. For ease of replication give "Administrative Access" to the user you will create. the role "aws-elasticbeanstalk-ec2-role" and "aws-elasticbeanstalk-service-role" created later for the elastic beanstalk deployment must also be given "Administrative Access".
 
 After the AWS account has been prepared, install AWS CLI  [link](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html). Configure the access keys by in  your local environment. Run the following commands and input the necessary details found in your access key file 
 

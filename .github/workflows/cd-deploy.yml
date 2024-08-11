@@ -38,7 +38,7 @@ jobs:
     - name: Deploy
       id: eb-deploy
       working-directory: 'deployment'
-      uses: sparkplug-app/install-eb-cli-action
+      #uses: sparkplug-app/install-eb-cli-action
       run: |
         eb init -p docker -r us-east-1 fineness-prediction-serving-tf
         eb create mill-project-serving
