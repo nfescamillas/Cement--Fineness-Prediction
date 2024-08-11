@@ -5,3 +5,7 @@
 !.elasticbeanstalk/*.global.yml
 
 .env
+
+
+# Pycache
+__pycache__/*

@@ -1,5 +1,5 @@
 """Model Prediction Interface"""
-import pickle
+# import pickle
 from io import StringIO
 from flask import Flask, request, jsonify
 import pandas as pd
