@@ -37,10 +37,9 @@ The objective of this project is to build an end to end project that predicts ce
 
 ### Project Workflow
  
-The project started by performing Data Preparation to Data Modeling in Jupyter Notebook. The dataset was stored in an S3 bucket as an xlsx file. The experiment done on the notebook was later implemented in Mage AI for orchestation that also incorporates experiment tracking and model registry. The model registry was then kept in a seperate S3 
-bucket for further use in the deployment phase.
+The project started by performing Data Preparation to Data Modeling in Jupyter Notebook. The dataset was stored in an S3 bucket as an xlsx file. The experiment done on the notebook was later implemented in Mage AI for orchestation that also incorporates experiment tracking and model registry. The model registry was then kept in a seperate S3 bucket for further use in the deployment phase.
 
-To run or test the project, one needs to have an AWS account with which the IAM role is configured. The following permissions needs to be given:
+To run or test the project, one needs to have an AWS account with which the IAM role is properly configured. The following permissions needs to be given:
 
 After the AWS account has been prepared, install AWS CLI  [link](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html). Configure the access keys by in  your local environment. Run the following commands and input the necessary details found in your access key file 
 
@@ -60,7 +59,11 @@ jupyter notebook
 
 The local dataset was also provided in the data folder for reference. To clone the repo run the following command:
 
-Navigate to the testing folder upon cloning and run 
+ ```bash
+git clone https://github.com/nfescamillas/Cement-Fineness-Prediction.git
+```
+
+Navigate to the testing folder upon cloning and run . 
 
 
  ```bash
@@ -69,7 +72,7 @@ make setup
 ```
 
 
-To be able to see the whole cloud infrastructure please refer to the Infrastructure section. To re create the whole cloud envrionement, install terraform [link](https://developer.hashicorp.com/terraform/install). Run the following commands 
+To be able to see the whole cloud infrastructure please refer to the Infrastructure section. To re create the whole cloud environment, install terraform [link](https://developer.hashicorp.com/terraform/install). Run the following commands 
 
  ```bash
 cd infrastructure
