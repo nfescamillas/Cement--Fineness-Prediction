@@ -4,20 +4,20 @@ on:
     branches:
       - 'develop'
     paths:
-      - 'deployment/**'
+      - 'testing/**'
 
 jobs:
   build-push-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo
+    - name: Checkout repository
       uses: actions/checkout@v3
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: 'us-east-1'
     - uses: hashicorp/setup-terraform@v2
       with:
         terraform_wrapper: false
@@ -28,19 +28,27 @@ jobs:
       run: |
         terraform init && terraform plan
 
-    - name: TF Apply
+
+    - name: TF Applyenv
       id: tf-apply
       working-directory: 'infrastructure'
-      if: ${{ steps.tf-plan.outcome}} == 'success'
+      if: ${{ steps.tf-plan.outcome }} == 'success'
       run: |
-        terraform apply -auto-approve 
+        terraform apply -auto-approve
+        echo *:: set-output name=eb_app::$(terraform output eb_application | xargs)*
+        echo *:: set-output name=eb_env::$(terraform output eb_environment | xargs)*
 
-    - name: Deploy
+    - name: EB Install
+      id: eb-install
+      uses: sparkplug-app/install-eb-cli-action
+
+
+    - name: EB Deploy
       id: eb-deploy
       working-directory: 'deployment'
-      #uses: sparkplug-app/install-eb-cli-action
       run: |
-        eb init -p docker -r us-east-1 fineness-prediction-serving-tf
-        eb create mill-project-serving
+          eb init -p docker -r us-east-1 ${{ steps.tf-apply.outputs.eb_app }}
+          eb create ${{ steps.tf-apply.outputs.eb_env }}
+  
 
 
